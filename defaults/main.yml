@@ -71,6 +71,7 @@ clustername: "patrick" # OpenShift-Clustername
 # Storage-Configuration
 sps_filesystem_fs1: "{{clustername}}"
 filesystem_name: "{{clustername}}"
+storage_class_scale: "ibm-spectrum-scale-{{sps_filesystem_fs1}}"
 
 # Users / Groups
 user_csiadmin: "csiadmin"
