@@ -76,7 +76,7 @@ filesystem_name: "{{clustername}}"
 user_csiadmin: "csiadmin"
 pass_csiadmin: "csipassword"
 
-user_cnsa: "cnsaadmin"
+user_cnsa: "cnsa"
 pass_cnsa: "cnsapassword"
 
 csiadmin_on_openshift_user: "csiadmin"
