@@ -48,7 +48,7 @@
   
 # Download Machine-Config and Containerruntime-YAML
 - name: "Download Machine-Config and Containerruntime-YAML"
-  url:
+  get_url:
     src: "{{url_machine_config}}"
     dest: "../templates/mco_x86_64-{{version_cnsa}}.yaml"
 
