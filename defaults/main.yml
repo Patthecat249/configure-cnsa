@@ -66,6 +66,7 @@ clustername: "patrick" # OpenShift-Clustername
 
 # Storage-Configuration
 sps_filesystem_fs1: "{{clustername}}"
+filesystem_name: "{{clustername}}"
 
 # Users / Groups
 user_csiadmin: "csiadmin"

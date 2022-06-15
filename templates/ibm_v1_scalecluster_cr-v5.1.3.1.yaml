@@ -197,8 +197,6 @@ spec:
       ip: {{sps.sps2.ip}}
     - hostname: {{sps.sps3.fqdn}}
       ip: {{sps.sps3.ip}}
-    - hostname: {{sps.sps4.fqdn}}
-      ip: {{sps.sps4.ip}}
 
     clusterProfile:
       controlSetxattrImmutableSELinux: "yes"
@@ -278,13 +276,13 @@ spec:
   - "{{sps.sps1.hostname}}"
   - "{{sps.sps2.hostname}}"
   - "{{sps.sps3.hostname}}"
-  - "{{sps.sps4.hostname}}"
+  
   gui:
     cacert: cacert-storage-cluster-1
     # This is the secret that contains the CSIAdmin user
     # credentials in the ibm-spectrum-scale-csi namespace.
     csiSecretName: "{{secret_name_storage_cluster_csi}}"
-    host: "{{sps.sps1.ip}}"
+    host: "{{sps.sps3.ip}}"
     insecureSkipVerify: true
     # This is the secret that contains the ContainerOperator user
     # credentials in the ibm-spectrum-scale namespace
