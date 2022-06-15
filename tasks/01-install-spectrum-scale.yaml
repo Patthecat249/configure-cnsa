@@ -49,7 +49,7 @@
 # Download Machine-Config and Containerruntime-YAML
 - name: "Download Machine-Config and Containerruntime-YAML"
   get_url:
-    src: "{{url_machine_config}}"
+    url: "{{url_machine_config}}"
     dest: "../templates/mco_x86_64-{{version_cnsa}}.yaml"
 
 # Set PID_Limits and Containerruntimeconfig
