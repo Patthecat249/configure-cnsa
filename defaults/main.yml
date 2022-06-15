@@ -25,7 +25,7 @@ node2: "scale2.home.local"
 node3: "scale3.home.local"
 gui_node: 
   hostname: "{{sps.sps3.fqdn}}"
-  ip: "sps.sps3.ip"
+  ip: "{{sps.sps3.ip}}"
 
 ## Hostname, FQDN, IP Spectrum-Scale
 sps:
