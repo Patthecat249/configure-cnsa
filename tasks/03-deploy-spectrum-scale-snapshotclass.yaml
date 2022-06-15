@@ -1,0 +1,17 @@
+# This playbook must be run on install-vm node 
+---
+# Dieses Playbook implementiert eine Snapshotclass
+
+# Create template for Snapshotclass-File
+- name: "### --- 02 - Create Snapshotclass-File from template"
+  template:
+    src: "../templates/snapshotclass.j2"
+    dest: "{{dir_spectrumscale}}snapshotclass-{{sps_filesystem_fs1}}.yaml"
+    force: "true"
+
+# Create the snapshotclass in OpenShift
+- name: "### --- 03 - Create the snapshotclass in OpenShift"
+  # raw: "oc --kubeconfig={{kubeconfig_path}} create -f {{dir_spectrumscale}}snapshotclass-{{sps_filesystem_fs1}}.yaml"
+  k8s:
+    state: present
+    src: "{{dir_spectrumscale}}snapshotclass-{{sps_filesystem_fs1}}.yaml"

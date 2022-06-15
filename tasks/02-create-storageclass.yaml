@@ -1,0 +1,50 @@
+# This playbook must be run on install-vm node 
+---
+# Dieses Playbook implementiert eine Storageclass
+
+# Retrieve and note down the Storage cluster ID:
+- name: "### --- 01 - Retrieve and note down the Storage cluster ID"
+  # raw: "curl -s -k https://{{sps.sps1.ip}}/scalemgmt/v2/cluster -u \"{{user_csiadmin}}:{{pass_csiadmin}}\" | grep clusterId | grep -oP \"[0-9]*\""
+  uri:
+    url: "https://{{sps.sps1.ip}}/scalemgmt/v2/cluster"
+    url_username: "{{ user_csiadmin }}"
+    url_password: "{{ pass_csiadmin }}"
+    force_basic_auth: yes
+    validate_certs: no
+    return_content: yes
+  no_log: yes
+  register: result_storage_cluster
+
+- name: "### --- 01a - Retrieve and note down the Storage cluster ID"
+  set_fact:
+    storage_cluster_id: "{{ result_storage_cluster.json.cluster.clusterSummary.clusterId }}"
+
+
+# Create template for Storageclass-File
+- name: "### --- 02 - Create Storageclass-File from template"
+  template:
+    src: "../templates/storageclass.j2"
+    dest: "{{dir_spectrumscale}}storageclass-{{sps_filesystem_fs1}}.yaml"
+    force: "true"
+
+# Create the StorageClass in OpenShift
+- name: "### --- 03 - Create the StorageClass in OpenShift"
+  # ignore_errors: "yes"
+  # raw: "oc --kubeconfig={{kubeconfig_path}} create -f {{dir_spectrumscale}}storageclass-{{sps_filesystem_fs1}}.yaml"
+  k8s:
+    state: present
+    src: "{{dir_spectrumscale}}storageclass-{{sps_filesystem_fs1}}.yaml"
+
+- name: "### --- 04 - Make StorageClass as default"
+  # raw: "oc --kubeconfig={{kubeconfig_path}} patch storageclass {{storage_class_scale}} -p '{\"metadata\": {\"annotations\":{\"storageclass.kubernetes.io/is-default-class\":\"true\"}}}'"
+  k8s:
+    state: present
+    definition:
+      kind: StorageClass
+      apiVersion: storage.k8s.io/v1
+      metadata:
+        name: "{{ storage_class_scale }}"
+        annotations:
+          storageclass.kubernetes.io/is-default-class: 'true'
+  tags:
+    - defaultstg

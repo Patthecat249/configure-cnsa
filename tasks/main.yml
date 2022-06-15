@@ -1,0 +1,10 @@
+---
+- name: Install Spectrum Scale {{ version_cnsa }}
+  include_tasks: 01-install-spectrum-scale.yaml
+
+- name: Create Storageclass
+  import_tasks: 02-create-storageclass.yaml
+
+- name: Deploy Snapshotclass
+  include_tasks: 03-deploy-spectrum-scale-snapshotclass.yaml
+

@@ -1,0 +1,42 @@
+apiVersion: scale.ibm.com/v1
+kind: ScaleCluster
+metadata:
+  name: ibm-spectrum-scale
+spec:
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
+
+  images:
+    core: "{{image_core}}"
+    coreInit: "{{image_coreInit}}"
+    gui: "{{image_gui}}"
+    postgres: "{{image_postgres}}"
+    pmcollector: "{{image_pmcollector}}"
+    sysmon: "{{image_sysmon}}"
+    logs: "{{image_logs}}"
+
+  filesystems:
+    - name: "{{filesystem_name_cnsa}}"
+      remoteMount:
+        storageCluster: "storageCluster1"
+        storageFs: "{{sps_filesystem_fs1}}"
+      # mountPoint must start with `/mnt`
+      mountPoint: "{{filesystem_mountpoint_cnsa}}"
+
+  remoteClusters:
+    - name: storageCluster1
+      gui:
+        cacert: "cacert-storage-cluster-1"
+        host: "{{sps.sps1.ip}}"
+        secretName: "{{secret_name_storage_cluster}}"
+        insecureSkipVerify: {{sps_insecureSkipVerify}}
+
+  hostAliases:
+    - hostname: {{sps.sps1.fqdn}}
+      ip: {{sps.sps1.ip}}
+    - hostname: {{sps.sps2.fqdn}}
+      ip: {{sps.sps2.ip}}
+    - hostname: {{sps.sps3.fqdn}}
+      ip: {{sps.sps3.ip}}
+    - hostname: {{sps.sps4.fqdn}}
+      ip: {{sps.sps4.ip}}
