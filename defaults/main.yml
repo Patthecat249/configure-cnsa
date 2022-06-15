@@ -56,7 +56,7 @@ workers:
     hostname: "patrick-kc75c-worker-ln8k5"
     ip: "11.11.12.127"
   - name: "worker04"
-    hostname: "patrick-kc75c-worker-xzll4 "
+    hostname: "patrick-kc75c-worker-xzll4"
     ip: "11.11.12.149"
 
 ## OpenShift-Infos
