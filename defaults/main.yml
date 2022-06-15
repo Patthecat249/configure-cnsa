@@ -77,7 +77,7 @@ user_csiadmin: "csiadmin"
 pass_csiadmin: "csipassword"
 
 user_cnsa: "cnsa"
-pass_cnsa: "cnsapassword"
+pass_cnsa: "Passw0rd"
 
 csiadmin_on_openshift_user: "csiadmin"
 csiadmin_on_openshift_pass: "csipassword"
