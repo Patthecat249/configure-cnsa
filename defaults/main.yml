@@ -69,10 +69,10 @@ clustername: "patrick" # OpenShift-Clustername
 
 
 # Storage-Configuration
-sps_filesystem_fs1: "{{clustername}}"
-filesystem_name: "{{clustername}}"
+sps_filesystem_fs1: "spsopenshift"
+filesystem_name: "spsopenshift"
 storage_class_scale: "ibm-spectrum-scale-{{sps_filesystem_fs1}}"
-
+filesystem_mountpoint_cnsa: "/mnt/{{filesystem_name}}"
 # Users / Groups
 user_csiadmin: "csiadmin"
 pass_csiadmin: "csipassword"
