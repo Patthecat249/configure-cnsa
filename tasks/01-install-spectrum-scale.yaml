@@ -46,7 +46,17 @@
       spec:
         paused: true
   
-    
+# Download Machine-Config and Containerruntime-YAML
+- name: "Download Machine-Config and Containerruntime-YAML"
+  url:
+    src: "{{url_machine_config}}"
+    dest: "../templates/mco_x86_64-{{version_cnsa}}.yaml"
+
+# Set PID_Limits and Containerruntimeconfig
+- name: "03a - Set PID_Limits and Containerruntimeconfig"
+  k8s:
+    state: present
+    src: "../templates/mco_x86_64-{{version_cnsa}}.yaml"   
 
 # Create a Namespace for SpectrumScale CNSA installation in OpenShift
 - name: "04 - Create the Namespace {{namespace_cnsa}}"
