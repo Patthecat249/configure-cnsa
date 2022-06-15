@@ -64,6 +64,7 @@ workers:
 
 ## OpenShift-Infos
 ## oc get routes -A | grep console-openshift-console | awk '{print $3}' | cut -d. -f3
+domainname: "home.local"
 clustername: "patrick" # OpenShift-Clustername
 
 
