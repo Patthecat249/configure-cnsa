@@ -6,7 +6,7 @@
 - name: "### --- 01 - Retrieve and note down the Storage cluster ID"
   # raw: "curl -s -k https://{{sps.sps1.ip}}/scalemgmt/v2/cluster -u \"{{user_csiadmin}}:{{pass_csiadmin}}\" | grep clusterId | grep -oP \"[0-9]*\""
   uri:
-    url: "https://{{sps.sps1.ip}}/scalemgmt/v2/cluster"
+    url: "https://{{gui_node.ip}}/scalemgmt/v2/cluster"
     url_username: "{{ user_csiadmin }}"
     url_password: "{{ pass_csiadmin }}"
     force_basic_auth: yes

@@ -8,8 +8,8 @@
 - name: "01 - Create working directories" 
   file:
     path: "{{ item }}"
-    owner: "ocpadm"
-    group: "ocpadmin"
+    owner: "root"
+    group: "root"
     mode: '0750'
     state: directory
     recurse: true
@@ -169,8 +169,8 @@
   template:
     src: "../templates/ibm-spectrum-scale-operator-v{{ version_cnsa }}.yaml"
     dest: "{{dir_spectrumscale}}ibm-spectrum-scale-operator-v{{ version_cnsa }}.yaml"
-    owner: "ocpadm"
-    group: "ocpadmin"
+    owner: "root"
+    group: "root"
     force: "yes"
     backup: "yes"
   tags:
@@ -182,8 +182,8 @@
   template:
     src: "../templates/ibm_v1_scalecluster_cr-v{{ version_cnsa }}.yaml"
     dest: "{{dir_spectrumscale}}ibm_v1_scalecluster_cr-v{{ version_cnsa }}.yaml"
-    owner: "ocpadm"
-    group: "ocpadmin"
+    owner: "root"
+    group: "root"
     force: "yes"
     backup: "yes"
   tags:

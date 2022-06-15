@@ -1,2 +1,88 @@
 ---
 # defaults file for configure-cnsa
+# CNSA-Version
+version_cnsa: "5.1.3.1"
+
+# Central-Working-Directory on Bastion-Node
+# Is needed to place some YAML-Files
+dir_spectrumscale: "/opt/sva/spectrumscale/"
+
+# OpenShift-Kubeconfig-Location
+kubeconfig_path: "/root/ipi/patrick/auth/kubeconfig"
+
+# Namespaces in OpenShift
+namespace_cnsa: "ibm-spectrum-scale"
+namespace_csi_driver: "ibm-spectrum-scale-csi"
+namespace_cnsa_operator: "ibm-spectrum-scale-operator"
+
+# CNSA-Network-Config (IPs, Ports, etc.)
+## Hostnames
+node1: "scale1.home.local"
+node2: "scale2.home.local"
+node3: "scale3.home.local"
+gui_node: 
+  hostname: "{{sps.sps3.fqdn}}"
+  ip: "sps.sps3.ip"
+
+## Hostname, FQDN, IP Spectrum-Scale
+sps:
+  sps1:
+    hostname: "{{node1}}"
+    fqdn: "{{node1}}"
+    ip: "10.0.249.161"
+    hostname: "{{node2}}"
+    fqdn: "{{node2}}"
+    ip: "10.0.249.162"
+    hostname: "{{node3}}"
+    fqdn: "{{node3}}"
+    ip: "10.0.249.163"
+
+## Ports
+ephemeral_port_begin: "60000"
+ephemeral_port_end: "60999"
+
+## OpenShift
+## oc get no -o wide | grep worker | awk '{print $1" - "$6}'
+workers:
+  - name: "worker01"
+    hostname: "patrick-kc75c-worker-2rc22"
+    ip: "11.11.12.131"
+  - name: "worker02"
+    hostname: "patrick-kc75c-worker-4wr7r"
+    ip: "11.11.12.134"
+  - name: "worker03"
+    hostname: "patrick-kc75c-worker-ln8k5"
+    ip: "11.11.12.127"
+  - name: "worker04"
+    hostname: "patrick-kc75c-worker-xzll4 "
+    ip: "11.11.12.149"
+
+## OpenShift-Infos
+## oc get routes -A | grep console-openshift-console | awk '{print $3}' | cut -d. -f3
+clustername: "patrick" # OpenShift-Clustername
+
+
+# Storage-Configuration
+sps_filesystem_fs1: "{{clustername}}"
+
+# Users / Groups
+user_csiadmin: "csiadmin"
+pass_csiadmin: "csipassword"
+
+user_cnsa: "cnsaadmin"
+pass_cnsa: "cnsapassword"
+
+csiadmin_on_openshift_user: "csiadmin"
+csiadmin_on_openshift_pass: "csipassword"
+
+grp_containeroperator: "ContainerOperator"
+role_containeroperator: "containeroperator"
+user_containeroperator: "ContainerOperator"
+
+# Secrets in OpenShift
+secret_name_storage_cluster_cnsa: "cnsa-remote-mount-storage-cluster-1"
+secret_name_storage_cluster_csi: "csi-remote-mount-storage-cluster-1"
+
+# Images in OpenShift
+image_scale_core_operator: ""
+REPLACE_SCALE_CORE_OPERATOR_IMAGE: "{{image_scale_core_operator}}"
